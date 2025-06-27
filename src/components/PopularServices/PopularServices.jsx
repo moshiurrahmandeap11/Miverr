@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 const PopularServices = () => {
   return (
     <div className="bg-white mx-auto px-4 py-10">
-      <div className="max-w-7xl mx-auto relative">
+      <div className="max-w-10/12 l mx-auto relative">
         <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-800">
           Popular Services
         </h2>
@@ -33,7 +33,7 @@ const PopularServices = () => {
         >
           {services.map((service, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-green-800 h-62  rounded-xl shadow-sm hover:shadow-md transition group border cursor-pointer flex flex-col">
+              <div className="bg-green-800 h-66 text-xl  rounded-xl shadow-sm hover:shadow-md transition group border cursor-pointer flex flex-col">
                 {/* Title */}
                 <div className="px-5 py-3 flex-grow">
                   <h3 className="text break-words font-semibold text-white  transition">
