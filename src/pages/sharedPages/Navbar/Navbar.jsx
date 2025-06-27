@@ -6,12 +6,14 @@ import {
   FaEnvelope,
   FaHeart,
   FaChevronDown,
+  FaSearch,
 } from "react-icons/fa";
-import { NavLink } from "react-router"; // fixed import
+import { NavLink } from "react-router";
 import SignUpModal from "../../../components/SignUpModal/SignUpModal";
 import SignInModal from "../../../components/SignInModal/SignInModal";
 import useAuth from "../../../Hooks/useAuth/useAuth";
 import toast from "react-hot-toast";
+import { useScrollState } from "../../../Providers/ScrollContext/ScrollContext";
 
 const Navbar = () => {
   const { user, logOutUser } = useAuth();
@@ -19,8 +21,10 @@ const Navbar = () => {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
-const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  const { showStickySearch } = useScrollState();
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
   const openSignUp = () => setModalType("signup");
   const openSignIn = () => setModalType("signin");
   const closeModal = () => setModalType(null);
@@ -38,10 +42,29 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
   return (
     <header className="bg-white text-black shadow-sm sticky top-0 z-50 border-b">
       <div className="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-y-4">
+        {/* Logo */}
         <NavLink to="/" className="text-2xl font-bold text-indigo-600">
           Miverr
         </NavLink>
 
+        {/* Sticky Search Bar for Non-Logged-in Users */}
+        {!user && showStickySearch && (
+          <div className="flex-1 max-w-xl hidden md:flex ml-4">
+            <div className="flex w-full bg-gray-100 rounded-full items-center shadow px-4 py-2">
+              <FaSearch className="text-gray-500 mr-2" />
+              <input
+                type="text"
+                placeholder="Search for any service"
+                className="flex-1 bg-transparent outline-none text-sm text-gray-800"
+              />
+              <button className="bg-green-600 text-white px-4 py-1 rounded-full text-sm hover:bg-green-700 transition">
+                Search
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Nav Items - Guest */}
         {!user && (
           <div className="hidden lg:flex gap-6 items-center font-medium text-gray-700">
             {[
@@ -59,11 +82,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
                 {dropdownOpen === key && (
                   <div className="absolute left-0 mt-2 w-40 bg-white rounded-md shadow-lg p-3 z-50">
                     {items.map((item) => (
-                      <a
-                        key={item}
-                        href="#"
-                        className="block hover:text-indigo-600"
-                      >
+                      <a key={item} href="#" className="block hover:text-indigo-600">
                         {item}
                       </a>
                     ))}
@@ -71,21 +90,20 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
                 )}
               </div>
             ))}
-            <a href="#" className="hover:text-indigo-600">
-              Become a Seller
-            </a>
+            <a href="#" className="hover:text-indigo-600">Become a Seller</a>
             <button onClick={openSignIn} className="hover:text-indigo-600 cursor-pointer">
               Sign In
             </button>
             <button
               onClick={openSignUp}
-              className="bg-indigo-600 cursor-pointer text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition"
+              className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition"
             >
               Join
             </button>
           </div>
         )}
 
+        {/* Nav Items - Logged In */}
         {user && (
           <div className="flex flex-1 items-center gap-4 justify-end flex-wrap">
             <input
@@ -147,7 +165,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
                   <hr className="my-1" />
                   <button
                     onClick={handleLogout}
-                    className="w-full cursor-pointer text-left px-4 py-2 text-red-600 hover:bg-gray-100"
+                    className="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
                   >
                     Log Out
                   </button>

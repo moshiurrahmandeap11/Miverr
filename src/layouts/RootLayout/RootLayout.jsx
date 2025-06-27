@@ -5,7 +5,7 @@ import Navbar from '../../pages/sharedPages/Navbar/Navbar';
 const RootLayout = () => {
     return (
         <div>
-            <header>
+            <header className='top-0 z-50 sticky'>
                 <Navbar></Navbar>
             </header>
             <main>

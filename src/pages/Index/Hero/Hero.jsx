@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import videofile from "../../../assets/bg-video.mp4";
+import { useScrollState } from "../../../Providers/ScrollContext/ScrollContext";
 
 const Hero = () => {
+  const searchRef = useRef();
+  const { setShowStickySearch } = useScrollState();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowStickySearch(!entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (searchRef.current) observer.observe(searchRef.current);
+    return () => searchRef.current && observer.unobserve(searchRef.current);
+  }, [setShowStickySearch]);
+
   return (
     <div className="relative h-[70vh] w-full overflow-hidden text-white">
       {/* Background Video */}
@@ -28,7 +44,7 @@ const Hero = () => {
         </h1>
 
         {/* Search Input */}
-        <div className="w-full max-w-2xl">
+        <div ref={searchRef} className="w-full max-w-2xl">
           <div className="flex bg-white rounded-full overflow-hidden items-center shadow-lg mt-4">
             <FaSearch className="text-gray-400 text-xl mx-4" />
             <input
@@ -59,27 +75,26 @@ const Hero = () => {
           ))}
         </div>
 
-{/* Trusted By */}
-<div className="mt-10 flex flex-col items-center gap-3">
-  <p className="text-sm text-gray-200">Trusted by:</p>
-  <div className="flex gap-8 flex-wrap justify-center items-center">
-    {[
-      "https://i.postimg.cc/fyVhK34B/03de3d1a-e0f1-4da5-b879-967afbc550bd-removebg-preview.png", // Google
-      "https://i.postimg.cc/sfb2Lznv/Meta-Logo.png",
-      "https://i.postimg.cc/YSy7mNZh/Logonetflix.png",
-      "https://i.postimg.cc/VvWHXmvD/Airbnb-Logo-wine.png",
-      "https://i.postimg.cc/gJvMPmVm/Shopify-Logo.png",
-    ].map((src, index) => (
-      <img
-        key={index}
-        src={src}
-        alt="company logo"
-        className="h-10 sm:h-12 md:h-14 max-w-[120px] object-contain brightness-110 hover:brightness-125 transition"
-      />
-    ))}
-  </div>
-</div>
-
+        {/* Trusted By */}
+        <div className="mt-10 flex flex-col items-center gap-3">
+          <p className="text-sm text-gray-200">Trusted by:</p>
+          <div className="flex gap-8 flex-wrap justify-center items-center">
+            {[
+              "https://i.postimg.cc/fyVhK34B/03de3d1a-e0f1-4da5-b879-967afbc550bd-removebg-preview.png",
+              "https://i.postimg.cc/sfb2Lznv/Meta-Logo.png",
+              "https://i.postimg.cc/YSy7mNZh/Logonetflix.png",
+              "https://i.postimg.cc/VvWHXmvD/Airbnb-Logo-wine.png",
+              "https://i.postimg.cc/gJvMPmVm/Shopify-Logo.png",
+            ].map((src, index) => (
+              <img
+                key={index}
+                src={src}
+                alt="company logo"
+                className="h-10 sm:h-12 md:h-14 max-w-[120px] object-contain brightness-110 hover:brightness-125 transition"
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

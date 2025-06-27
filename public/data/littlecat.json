@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Programming & Tech",
+    "icon": "FaCode"
+  },
+  {
+    "id": 2,
+    "name": "Graphics & Design",
+    "icon": "FaPaintBrush"
+  },
+  {
+    "id": 3,
+    "name": "Digital Marketing",
+    "icon": "FaBullhorn"
+  },
+  {
+    "id": 4,
+    "name": "Writing & Translation",
+    "icon": "FaPenNib"
+  },
+  {
+    "id": 5,
+    "name": "Video & Animation",
+    "icon": "FaVideo"
+  },
+  {
+    "id": 6,
+    "name": "AI Services",
+    "icon": "FaRobot"
+  },
+  {
+    "id": 7,
+    "name": "Music & Audio",
+    "icon": "FaMusic"
+  },
+  {
+    "id": 8,
+    "name": "Business",
+    "icon": "FaBriefcase"
+  },
+  {
+    "id": 9,
+    "name": "Consulting",
+    "icon": "FaUserTie"
+  }
+]
