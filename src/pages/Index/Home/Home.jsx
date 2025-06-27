@@ -8,6 +8,8 @@ import Banner from "../../../components/Banner/Banner";
 import categories from "../../../../public/data/topNav.json";
 import SecondBanner from "../../../components/SecondBanner/SecondBanner";
 import Success from "../../../components/Success/Success";
+import Trusted from "../../../components/Trusted/Trusted";
+import MakeItHappen from "../../../components/makeithapper/makeithappen";
 
 const Home = () => {
   const [showStickyNav, setShowStickyNav] = useState(false);
@@ -49,6 +51,8 @@ const Home = () => {
       <Banner />
       <SecondBanner></SecondBanner>
       <Success></Success>
+      <Trusted></Trusted>
+      <MakeItHappen></MakeItHappen>
     </div>
   );
 };
