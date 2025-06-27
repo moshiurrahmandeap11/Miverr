@@ -11,6 +11,8 @@ import Success from "../../../components/Success/Success";
 import Trusted from "../../../components/Trusted/Trusted";
 import MakeItHappen from "../../../components/makeithapper/makeithappen";
 import MadeOnMiverr from "../../../components/MadeOnMiverr/MadeOnMiverr";
+import Grow from "../../../components/Grow/Grow";
+import JoinMiverr from "../../../components/JoinMiverr/JoinMiverr";
 
 const Home = () => {
   const [showStickyNav, setShowStickyNav] = useState(false);
@@ -55,6 +57,8 @@ const Home = () => {
       <Trusted></Trusted>
       <MakeItHappen></MakeItHappen>
       <MadeOnMiverr></MadeOnMiverr>
+      <Grow></Grow>
+      <JoinMiverr></JoinMiverr>
     </div>
   );
 };

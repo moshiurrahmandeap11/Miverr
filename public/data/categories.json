@@ -1,0 +1,78 @@
+[
+  {
+    "title": "Categories",
+    "items": [
+      { "name": "Graphics & Design", "link": "/categories/graphics-design" },
+      { "name": "Digital Marketing", "link": "/categories/digital-marketing" },
+      { "name": "Writing & Translation", "link": "/categories/writing-translation" },
+      { "name": "Video & Animation", "link": "/categories/video-animation" },
+      { "name": "Music & Audio", "link": "/categories/music-audio" },
+      { "name": "Programming & Tech", "link": "/categories/programming-tech" },
+      { "name": "AI Services", "link": "/categories/ai-services" },
+      { "name": "Consulting", "link": "/categories/consulting" },
+      { "name": "Data", "link": "/categories/data" },
+      { "name": "Business", "link": "/categories/business" },
+      { "name": "Personal Growth & Hobbies", "link": "/categories/personal-growth" },
+      { "name": "Photography", "link": "/categories/photography" },
+      { "name": "Finance", "link": "/categories/finance" },
+      { "name": "End-to-End Projects", "link": "/categories/end-to-end-projects" },
+      { "name": "Service Catalog", "link": "/categories/service-catalog" }
+    ]
+  },
+  {
+    "title": "For Clients",
+    "items": [
+      { "name": "How Fiverr Works", "link": "/clients/how-it-works" },
+      { "name": "Customer Success Stories", "link": "/clients/success-stories" },
+      { "name": "Trust & Safety", "link": "/clients/trust-safety" },
+      { "name": "Quality Guide", "link": "/clients/quality-guide" },
+      { "name": "Fiverr Learn - Online Courses", "link": "/clients/learn" },
+      { "name": "Fiverr Guides", "link": "/clients/guides" },
+      { "name": "Fiverr Answers", "link": "/clients/answers" }
+    ]
+  },
+  {
+    "title": "For Freelancers",
+    "items": [
+      { "name": "Become a Fiverr Freelancer", "link": "/freelancers/become" },
+      { "name": "Become an Agency", "link": "/freelancers/agency" },
+      { "name": "Freelancer Equity Program", "link": "/freelancers/equity-program" },
+      { "name": "Community Hub", "link": "/freelancers/community" },
+      { "name": "Forum", "link": "/freelancers/forum" },
+      { "name": "Events", "link": "/freelancers/events" }
+    ]
+  },
+  {
+    "title": "Business Solutions",
+    "items": [
+      { "name": "Miverr Pro", "link": "/business/pro" },
+      { "name": "Project Management Service", "link": "/business/project-management" },
+      { "name": "Expert Sourcing Service", "link": "/business/expert-sourcing" },
+      { "name": "ClearVoice - Content Marketing", "link": "/business/clearvoice" },
+      { "name": "Working Not Working - Creative Talent", "link": "/business/wnw" },
+      { "name": "AutoDS - Dropshipping Tool", "link": "/business/autods" },
+      { "name": "AI store builder", "link": "/business/ai-store-builder" },
+      { "name": "Miverr Logo Maker", "link": "/business/logo-maker" },
+      { "name": "Contact Sales", "link": "/business/contact-sales" },
+      { "name": "Miverr Go", "link": "/business/miverr-go" }
+    ]
+  },
+  {
+    "title": "Company",
+    "items": [
+      { "name": "About Miverr", "link": "/company/about" },
+      { "name": "Help & Support", "link": "/company/help-support" },
+      { "name": "Social Impact", "link": "/company/social-impact" },
+      { "name": "Careers", "link": "/company/careers" },
+      { "name": "Terms of Service", "link": "/company/terms" },
+      { "name": "Privacy Policy", "link": "/company/privacy" },
+      { "name": "Do not sell or share my personal information", "link": "/company/data-rights" },
+      { "name": "Partnerships", "link": "/company/partnerships" },
+      { "name": "Creator Network", "link": "/company/creator-network" },
+      { "name": "Affiliates", "link": "/company/affiliates" },
+      { "name": "Invite a Friend", "link": "/company/invite" },
+      { "name": "Press & News", "link": "/company/press" },
+      { "name": "Investor Relations", "link": "/company/investors" }
+    ]
+  }
+]
