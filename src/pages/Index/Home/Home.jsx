@@ -6,6 +6,7 @@ import StickyCategoryNav from "../../../components/StickyCategoryNav/StickyCateg
 import Banner from "../../../components/Banner/Banner";
 
 import categories from "../../../../public/data/topNav.json";
+import SecondBanner from "../../../components/SecondBanner/SecondBanner";
 
 const Home = () => {
   const [showStickyNav, setShowStickyNav] = useState(false);
@@ -45,6 +46,7 @@ const Home = () => {
       <PopularServices />
       <StickyCategoryNav categories={categories} isVisible={showStickyNav} />
       <Banner />
+      <SecondBanner></SecondBanner>
     </div>
   );
 };
