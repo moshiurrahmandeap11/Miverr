@@ -10,6 +10,7 @@ import SecondBanner from "../../../components/SecondBanner/SecondBanner";
 import Success from "../../../components/Success/Success";
 import Trusted from "../../../components/Trusted/Trusted";
 import MakeItHappen from "../../../components/makeithapper/makeithappen";
+import MadeOnMiverr from "../../../components/MadeOnMiverr/MadeOnMiverr";
 
 const Home = () => {
   const [showStickyNav, setShowStickyNav] = useState(false);
@@ -53,6 +54,7 @@ const Home = () => {
       <Success></Success>
       <Trusted></Trusted>
       <MakeItHappen></MakeItHappen>
+      <MadeOnMiverr></MadeOnMiverr>
     </div>
   );
 };
