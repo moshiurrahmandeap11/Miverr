@@ -1,11 +1,23 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaGoogle, FaEnvelope, FaApple, FaFacebook } from "react-icons/fa";
-import Lottie from "lottie-react";
-import animationData from "../../assets/lottiefiles/signinlottie.json"
 import { FcGoogle } from "react-icons/fc";
+import { FaXTwitter } from "react-icons/fa6";
+import Lottie from "lottie-react";
+import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
+
+import animationData from "../../assets/lottiefiles/signinlottie.json";
+import useAuth from "../../Hooks/useAuth/useAuth";
+import MiverrLoader from "../Loader/MiverrLoader";
 
 const SignInModal = ({ onClose, onSwitchToSignUp }) => {
+  const { loading, signInUser, googleUser, xUser, facebookUser } = useAuth();
   const modalRef = useRef();
+  const navigate = useNavigate();
+
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -13,10 +25,64 @@ const SignInModal = ({ onClose, onSwitchToSignUp }) => {
         onClose();
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
+
+  const handleGoogleLogin = async () => {
+    try {
+      const res = await googleUser();
+      if (res.user) {
+        toast.success("Logged In Successfully");
+        onClose();
+        navigate("/");
+      }
+    } catch {
+      toast.error("Google login failed");
+    }
+  };
+
+  const handleXLogin = async () => {
+    try {
+      const res = await xUser();
+      if (res.user) {
+        toast.success("Logged In Successfully");
+        onClose();
+        navigate("/");
+      }
+    } catch {
+      toast.error("X login failed");
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    try {
+      const res = await facebookUser();
+      if (res.user) {
+        toast.success("Logged In Successfully");
+        onClose();
+        navigate("/");
+      }
+    } catch {
+      toast.error("Facebook login failed");
+    }
+  };
+
+  const handleEmailLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await signInUser(email, password);
+      if (res.user) {
+        toast.success("Logged In Successfully");
+        onClose();
+        navigate("/");
+      }
+    } catch {
+      toast.error("Something went wrong");
+    }
+  };
+
+  if (loading) return <MiverrLoader />;
 
   return (
     <div className="fixed inset-0 z-50 bg-transparent backdrop-blur-sm flex items-center justify-center px-4">
@@ -24,24 +90,23 @@ const SignInModal = ({ onClose, onSwitchToSignUp }) => {
         ref={modalRef}
         className="bg-white rounded-2xl shadow-lg w-full max-w-4xl overflow-hidden flex flex-col md:flex-row relative"
       >
-        {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute cursor-pointer top-4 right-4 text-gray-500 hover:text-black text-xl"
+          className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl"
         >
           &times;
         </button>
 
-        {/* Left - Lottie */}
+        {/* Lottie Animation */}
         <div className="md:w-1/2 w-full bg-gray-100 flex items-center justify-center p-6">
           <Lottie
             animationData={animationData}
-            loop={true}
+            loop
             className="w-full max-w-xs md:max-w-sm"
           />
         </div>
 
-        {/* Right - Form */}
+        {/* Sign In Section */}
         <div className="md:w-1/2 w-full p-8 flex flex-col justify-center space-y-6">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
@@ -51,52 +116,96 @@ const SignInModal = ({ onClose, onSwitchToSignUp }) => {
               Don't have an account?{" "}
               <button
                 onClick={onSwitchToSignUp}
-                className="text-indigo-600 font-bold hover:underline cursor-pointer bg-transparent border-0 p-0"
+                className="text-indigo-600 font-bold hover:underline"
               >
                 Join Here
               </button>
             </p>
           </div>
 
-          <div className="space-y-3">
-            <button className="w-full cursor-pointer text-black font-semibold flex items-center justify-center gap-2 py-3 px-4 border border-gray-300 rounded-lg hover:bg-gray-100 transition">
-              <FcGoogle size={24} />
-              Continue with Google
-            </button>
-            <button className="w-full text-black font-semibold cursor-pointer flex items-center justify-center gap-2 py-3 px-4 border border-gray-300 rounded-lg hover:bg-gray-100 transition">
-              <FaEnvelope className="text-xl" />
-              Continue with Email/Password
-            </button>
-          </div>
+          {!showEmailForm ? (
+            <>
+              <button
+                onClick={handleGoogleLogin}
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 border border-gray-300 rounded-lg hover:bg-gray-100 transition font-semibold"
+              >
+                <FcGoogle size={24} /> Continue with Google
+              </button>
+              <button
+                onClick={() => setShowEmailForm(true)}
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 border border-gray-300 rounded-lg hover:bg-gray-100 transition font-semibold"
+              >
+                <FaEnvelope className="text-xl" /> Continue with Email/Password
+              </button>
 
-          <div className="relative my-4">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
-            </div>
-            <div className="relative flex justify-center text-sm text-gray-500">
-              <span className="bg-white px-2">or</span>
-            </div>
-          </div>
+              <div className="relative my-4">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300" />
+                </div>
+                <div className="relative flex justify-center text-sm text-gray-500">
+                  <span className="bg-white px-2">or</span>
+                </div>
+              </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center w-full gap-3">
-            <button className="btn bg-transparent text-black flex-1">
-              <FaApple size={24} /> Apple
-            </button>
-            <button className="btn bg-transparent text-black flex-1">
-              <FaFacebook size={22} /> Facebook
-            </button>
-          </div>
+              <div className="flex flex-col md:flex-row gap-3">
+                <button
+                  onClick={handleXLogin}
+                  className="btn bg-transparent text-black flex-1 border border-gray-300 hover:bg-gray-100"
+                >
+                  <FaXTwitter size={24} /> X
+                </button>
+                <button
+                  onClick={handleFacebookLogin}
+                  className="btn bg-transparent text-black flex-1 border border-gray-300 hover:bg-gray-100"
+                >
+                  <FaFacebook size={22} /> Facebook
+                </button>
+              </div>
+            </>
+          ) : (
+            <form onSubmit={handleEmailLogin} className="space-y-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="Email"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="Password"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <button
+                type="submit"
+                className="w-full bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700 transition font-semibold"
+              >
+                Sign In
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowEmailForm(false)}
+                className="text-sm text-gray-500 hover:underline"
+              >
+                Back to other options
+              </button>
+            </form>
+          )}
 
           <p className="text-xs text-gray-400 mt-4 leading-relaxed">
-            By signing in, you agree to the Fiverr{" "}
+            By signing in, you agree to the Miverr{" "}
             <a href="#" className="text-indigo-600 underline">
               Terms of Service
             </a>{" "}
-            and to occasionally receive emails from us. Please read our{" "}
+            and consent to receive occasional emails from us. Please review our{" "}
             <a href="#" className="text-indigo-600 underline">
               Privacy Policy
             </a>{" "}
-            to learn how we use your personal data.
+            to understand how your data is used.
           </p>
         </div>
       </div>
