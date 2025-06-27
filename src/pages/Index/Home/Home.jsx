@@ -7,6 +7,7 @@ import Banner from "../../../components/Banner/Banner";
 
 import categories from "../../../../public/data/topNav.json";
 import SecondBanner from "../../../components/SecondBanner/SecondBanner";
+import Success from "../../../components/Success/Success";
 
 const Home = () => {
   const [showStickyNav, setShowStickyNav] = useState(false);
@@ -47,6 +48,7 @@ const Home = () => {
       <StickyCategoryNav categories={categories} isVisible={showStickyNav} />
       <Banner />
       <SecondBanner></SecondBanner>
+      <Success></Success>
     </div>
   );
 };
