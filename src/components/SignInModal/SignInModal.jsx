@@ -3,7 +3,7 @@ import { FaGoogle, FaEnvelope, FaApple, FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { FaXTwitter } from "react-icons/fa6";
 import Lottie from "lottie-react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
 import animationData from "../../assets/lottiefiles/signinlottie.json";
@@ -198,13 +198,13 @@ const SignInModal = ({ onClose, onSwitchToSignUp }) => {
 
           <p className="text-xs text-gray-400 mt-4 leading-relaxed">
             By signing in, you agree to the Miverr{" "}
-            <a href="#" className="text-indigo-600 underline">
+            <Link to={"/legal-terms"} className="text-indigo-600 underline">
               Terms of Service
-            </a>{" "}
+            </Link>{" "}
             and consent to receive occasional emails from us. Please review our{" "}
-            <a href="#" className="text-indigo-600 underline">
+            <Link to={"/privacy-policy"} className="text-indigo-600 underline">
               Privacy Policy
-            </a>{" "}
+            </Link>{" "}
             to understand how your data is used.
           </p>
         </div>
