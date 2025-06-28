@@ -21,9 +21,9 @@ const Hero = () => {
 
   return (
     <div className="relative h-[70vh] w-full overflow-hidden text-white">
-      {/* Background Video */}
+      {/* Video only for md+ */}
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        className="hidden sm:block absolute top-0 left-0 w-full h-full object-cover z-0"
         autoPlay
         loop
         muted
@@ -33,19 +33,23 @@ const Hero = () => {
         Your browser does not support the video tag.
       </video>
 
-      {/* Overlay */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-10" />
+      {/* Overlay for video (only on md+) */}
+      <div className="hidden sm:block absolute top-0 left-0 w-full h-full bg-black/60 z-10" />
+
+      {/* Mobile fallback background */}
+      <div className="sm:hidden absolute inset-0 bg-gradient-to-b from-green-900 to-green-700 z-0" />
 
       {/* Content */}
       <div className="relative z-20 max-w-6xl mx-auto h-full px-4 flex flex-col justify-center items-center text-center space-y-6">
         {/* Heading */}
-        <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-          Our freelancers<br className="hidden sm:block" /> will take it from here
+        <h1 className="text-3xl px-5 sm:text-4xl md:text-5xl font-bold leading-tight">
+          Our freelancers
+          <br className="hidden sm:block" /> will take it from here
         </h1>
 
-        {/* Search Input */}
+        {/* Search Box */}
         <div ref={searchRef} className="w-full max-w-2xl">
-          <div className="flex bg-white rounded-full overflow-hidden items-center shadow-lg mt-4">
+          <div className="flex bg-white rounded-2xl overflow-hidden items-center shadow-lg mt-4">
             <FaSearch className="text-gray-400 text-xl mx-4" />
             <input
               type="text"
@@ -58,8 +62,8 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Categories */}
-        <div className="mt-6 flex flex-wrap gap-3 justify-center text-sm">
+        {/* Categories (hidden on phones) */}
+        <div className="hidden sm:flex mt-6 flex-wrap gap-3 justify-center text-sm">
           {[
             "Website Development",
             "Architecture & Interior Design",
@@ -75,8 +79,8 @@ const Hero = () => {
           ))}
         </div>
 
-        {/* Trusted By */}
-        <div className="mt-10 flex flex-col items-center gap-3">
+        {/* Trusted By (hidden on phones) */}
+        <div className="hidden sm:flex mt-10 flex-col items-center gap-3">
           <p className="text-sm text-gray-200">Trusted by:</p>
           <div className="flex gap-8 flex-wrap justify-center items-center">
             {[

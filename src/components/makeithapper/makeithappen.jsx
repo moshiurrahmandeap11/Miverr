@@ -78,8 +78,8 @@ const MakeItHappen = () => {
   ];
 
   return (
-    <section className="w-full bg-white py-12">
-      <div className="w-10/12 mx-auto">
+    <section className="w-full bg-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
         <h3 className="text-3xl font-bold mb-10 text-center text-gray-900">
           Make It Happen
         </h3>
@@ -89,7 +89,7 @@ const MakeItHappen = () => {
           {points.map(({ icon, name }) => (
             <div
               key={name}
-              className="w-72 flex items-center gap-5 p-6 bg-blue-50 rounded-xl shadow hover:shadow-lg transition cursor-pointer"
+              className="w-full sm:w-80 md:w-72 flex items-center gap-5 p-6 bg-blue-50 rounded-xl shadow hover:shadow-lg transition cursor-pointer"
             >
               <Icon name={icon} />
               <p className="text-gray-800 font-medium">{name}</p>
@@ -99,7 +99,7 @@ const MakeItHappen = () => {
 
         {/* Centered Button */}
         <div className="text-center mt-8">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-10 rounded-lg transition">
+          <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-10 rounded-lg transition">
             Join Now
           </button>
         </div>

@@ -50,7 +50,9 @@ const Home = () => {
         <CategoryGrid />
       </div>
       <PopularServices />
-      <StickyCategoryNav categories={categories} isVisible={showStickyNav} />
+      <div className="hidden lg:block">
+        <StickyCategoryNav categories={categories} isVisible={showStickyNav} />
+      </div>
       <Banner />
       <SecondBanner></SecondBanner>
       <Success></Success>
