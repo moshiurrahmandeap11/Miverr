@@ -9,12 +9,15 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import { NavLink } from "react-router";
-import SignUpModal from "../../../components/SignUpModal/SignUpModal";
+
 import SignInModal from "../../../components/SignInModal/SignInModal";
 import useAuth from "../../../Hooks/useAuth/useAuth";
 import toast from "react-hot-toast";
 import { useScrollState } from "../../../Providers/ScrollContext/ScrollContext";
-import topNav from "../../../../public/data/topNav.json"
+import topNav from "../../../../public/data/topNav.json";
+import SignUpModal from "../../../components/SignUpMOdal/SignUpModal";
+import MiverPro from "../../../components/NavbarItems/MiverPro/MiverPro";
+import Explore from "../../../components/NavbarItems/Explore/Explore";
 
 const Navbar = () => {
   const { user, logOutUser } = useAuth();
@@ -24,18 +27,16 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [browseOpen, setBrowseOpen] = useState(false);
   const [exploreOpen, setExploreOpen] = useState(false);
-const [proOpen, setProOpen] = useState(false)
-
-  
+  const [proOpen, setProOpen] = useState(false);
 
   const { showStickySearch } = useScrollState();
-const toggleBrowse = () => setBrowseOpen((prev) => !prev);
+  const toggleBrowse = () => setBrowseOpen((prev) => !prev);
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const openSignUp = () => setModalType("signup");
   const openSignIn = () => setModalType("signin");
   const closeModal = () => setModalType(null);
   const toggleExplore = () => setExploreOpen((prev) => !prev);
-const togglePro = () => setProOpen((prev) => !prev);
+  const togglePro = () => setProOpen((prev) => !prev);
 
   const handleLogout = () => {
     logOutUser()
@@ -69,8 +70,36 @@ const togglePro = () => setProOpen((prev) => !prev);
   return (
     <header className="bg-white text-black shadow-sm sticky top-0 z-50 lg:border-b">
       <div className="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-y-4">
-        {/* Logo */}
-        <NavLink to="/" className="text-2xl font-bold text-indigo-600">
+        {/* Hamburger Menu on Mobile - LEFT */}
+        <div className="flex items-center gap-4 flex-1 lg:hidden">
+          <button
+            onClick={toggleMenu}
+            className="text-2xl text-gray-700 focus:outline-none"
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+
+          {/* Logo */}
+          <NavLink to="/" className="text-2xl font-bold text-indigo-600">
+            Miverr
+          </NavLink>
+          {!user && (
+            <div className="ml-auto lg:hidden">
+              <button
+                onClick={openSignUp}
+                className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm hover:bg-indigo-700 transition"
+              >
+                Join
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Logo for large screen */}
+        <NavLink
+          to="/"
+          className="hidden lg:block text-2xl font-bold text-indigo-600"
+        >
           Miverr
         </NavLink>
 
@@ -98,34 +127,38 @@ const togglePro = () => setProOpen((prev) => !prev);
               {
                 key: "pro",
                 label: "Miverr Pro",
-                items: ["Business", "Freelancers"],
+                content: <MiverPro />,
               },
               {
                 key: "explore",
                 label: "Explore",
-                items: ["Marketplace", "Trending"],
+                content: <Explore></Explore>,
               },
-              { key: "lang", label: "English", items: ["বাংলা", "Español"] },
-            ].map(({ key, label, items }) => (
+              {
+                key: "lang",
+                label: "English",
+                content: (
+                  <div className="w-40 bg-white shadow-lg p-3 rounded-md space-y-2">
+                    <a href="#" className="block hover:text-indigo-600">
+                      বাংলা
+                    </a>
+                    <a href="#" className="block hover:text-indigo-600">
+                      Español
+                    </a>
+                  </div>
+                ),
+              },
+            ].map(({ key, label, content }) => (
               <div key={key} className="relative">
                 <button
                   onClick={() => handleDropdown(key)}
-                  className="flex items-center gap-1 hover:text-indigo-600"
+                  className="flex items-center gap-1 px-3 py-1.5 cursor-pointer rounded-md transition hover:bg-gray-100 text-gray-700 hover:text-indigo-600"
                 >
                   {label} <FaChevronDown className="text-sm mt-0.5" />
                 </button>
+
                 {dropdownOpen === key && (
-                  <div className="absolute left-0 mt-2 w-40 bg-white rounded-md shadow-lg p-3 z-50">
-                    {items.map((item) => (
-                      <a
-                        key={item}
-                        href="#"
-                        className="block hover:text-indigo-600"
-                      >
-                        {item}
-                      </a>
-                    ))}
-                  </div>
+                  <div className="absolute right-0 mt-3 z-50">{content}</div>
                 )}
               </div>
             ))}
@@ -153,7 +186,7 @@ const togglePro = () => setProOpen((prev) => !prev);
             <input
               type="text"
               placeholder="What service are you looking for today?"
-              className="hidden md:block flex-1 px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="hidden md:block flex-1 ml-4 px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
             <FaBell className="text-gray-600 text-xl cursor-pointer hidden sm:block" />
             <FaEnvelope className="text-gray-600 text-xl cursor-pointer hidden sm:block" />
@@ -234,16 +267,6 @@ const togglePro = () => setProOpen((prev) => !prev);
             </div>
           </div>
         )}
-
-        {/* Mobile menu toggle */}
-        <div className="lg:hidden">
-          <button
-            onClick={toggleMenu}
-            className="text-2xl text-gray-700 focus:outline-none"
-          >
-            {menuOpen ? <FaTimes /> : <FaBars />}
-          </button>
-        </div>
       </div>
 
       {/* Auth Modals */}
@@ -266,13 +289,13 @@ const togglePro = () => setProOpen((prev) => !prev);
         }`}
       >
         <div className="p-5 space-y-4">
+          <button
+            onClick={openSignUp}
+            className="bg-indigo-600 w-full text-base text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition"
+          >
+            Join Miverr
+          </button>
           <div className="space-y-2">
-            <button
-              onClick={openSignUp}
-              className="block w-full text-left btn bg-indigo-600 text-white font-semibold"
-            >
-              Join Fiverr
-            </button>
             <button
               onClick={openSignIn}
               className="block w-full font-semibold text-left text-gray-700"
@@ -280,97 +303,96 @@ const togglePro = () => setProOpen((prev) => !prev);
               Sign In
             </button>
           </div>
-<div>
-  <button
-    onClick={toggleBrowse}
-    className="w-full text-left font-bold  text-black mb-2 flex justify-between items-center"
-  >
-    Browse Categories
-    <span>{browseOpen ? "▲" : "▼"}</span>
-  </button>
+          <div>
+            <button
+              onClick={toggleBrowse}
+              className="w-full text-left font-bold  text-black mb-2 flex justify-between items-center"
+            >
+              Browse Categories
+              <span>{browseOpen ? "▲" : "▼"}</span>
+            </button>
 
-  <div
-    className={`overflow-hidden transition-all duration-300 ease-in-out ${
-      browseOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-    }`}
-  >
-    <div className="space-y-1 pl-2 text-sm pt-1">
-      {topNav.map((cat, i) => (
-        <button
-          key={i}
-          className="block w-full text-left text-gray-800 hover:text-indigo-600"
-        >
-          {cat.name}
-        </button>
-      ))}
-    </div>
-  </div>
-</div>
-
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                browseOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="space-y-1 pl-2 text-sm pt-1">
+                {topNav.map((cat, i) => (
+                  <button
+                    key={i}
+                    className="block w-full text-left text-gray-800 hover:text-indigo-600"
+                  >
+                    {cat.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
 
           <div>
             {/* Explore */}
-  <div>
-    <button
-      onClick={toggleExplore}
-      className="w-full text-left font-bold  text-black mb-2 flex justify-between items-center"
-    >
-      Explore
-      <span>{exploreOpen ? "▲" : "▼"}</span>
-    </button>
-    <div
-      className={`overflow-hidden transition-all duration-300 ease-in-out ${
-        exploreOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-      }`}
-    >
-      <div className="space-y-1 pl-2 text-sm pt-1">
-        <a
-          href="#"
-          className="block w-full text-left text-gray-800 hover:text-indigo-600"
-        >
-          Marketplace
-        </a>
-        <a
-          href="#"
-          className="block w-full text-left text-gray-800 hover:text-indigo-600"
-        >
-          Trending
-        </a>
-      </div>
-    </div>
-  </div>
+            <div>
+              <button
+                onClick={toggleExplore}
+                className="w-full text-left font-bold text-black mb-2 flex justify-between items-center"
+              >
+                Explore
+                <span>{exploreOpen ? "▲" : "▼"}</span>
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  exploreOpen
+                    ? "max-h-[400px] opacity-100"
+                    : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="pl-2 pt-1">{exploreOpen && <Explore />}</div>
+              </div>
+            </div>
+
+            {/* Miverr Pro */}
+            <div>
+              <button
+                onClick={togglePro}
+                className="w-full text-left font-bold text-black mb-2 flex justify-between items-center"
+              >
+                Miverr Pro
+                <span>{proOpen ? "▲" : "▼"}</span>
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  proOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="pl-2 pt-1">{proOpen && <MiverPro />}</div>
+              </div>
+            </div>
           </div>
 
-{/* Miverr Pro */}
-  <div>
-    <button
-      onClick={togglePro}
-      className="w-full text-left font-bold  text-black mb-2 flex justify-between items-center"
-    >
-      Miverr Pro
-      <span>{proOpen ? "▲" : "▼"}</span>
-    </button>
-    <div
-      className={`overflow-hidden transition-all duration-300 ease-in-out ${
-        proOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-      }`}
-    >
-      <div className="space-y-1 pl-2 text-sm pt-1">
-        <a
-          href="#"
-          className="block w-full text-left text-gray-800 hover:text-indigo-600"
-        >
-          Business
-        </a>
-        <a
-          href="#"
-          className="block w-full text-left text-gray-800 hover:text-indigo-600"
-        >
-          Freelancers
-        </a>
-      </div>
-    </div>
-  </div>
+          {/* Miverr Pro */}
+          <div>
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                proOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="space-y-1 pl-2 text-sm pt-1">
+                <a
+                  href="#"
+                  className="block w-full text-left text-gray-800 hover:text-indigo-600"
+                >
+                  Business
+                </a>
+                <a
+                  href="#"
+                  className="block w-full text-left text-gray-800 hover:text-indigo-600"
+                >
+                  Freelancers
+                </a>
+              </div>
+            </div>
+          </div>
 
           <div>
             <h3 className="text-black font-bold mb-2">General</h3>

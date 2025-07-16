@@ -7,6 +7,9 @@ import AdminDashboard from "../../pages/MiAdmin/AdminDashboard/AdminDashboard";
 import AdminLogin from "../../pages/MiAdmin/AdminLogin/AdminLogin";
 import TermsAndConditions from "../../components/Terms/TermsAndConditions";
 import PrivacyPolicy from "../../components/PrivacyPolicy/PrivacyPolicy";
+import ProLayout from "../../layouts/ProLayout/ProLayout";
+import Satisfaction from "../../ProComponents/Satisfaction/Satisfaction";
+import ProPlans from "../../ProComponents/ProSharedItems/ProNavComponents/ProPlans/ProPlans";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +27,20 @@ const router = createBrowserRouter([
             {
                 path: "/privacy-policy",
                 Component: PrivacyPolicy,
+            }
+        ]
+    },
+    {
+        path: "/pro",
+        Component: ProLayout,
+        children: [
+            {
+                path: "satisfaction-guarantee",
+                Component: Satisfaction,
+            },
+            {
+                path: "plans",
+                Component: ProPlans,
             }
         ]
     },
