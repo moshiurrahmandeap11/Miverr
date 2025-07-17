@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import ProFaq from "./ProFaq/ProFaq";
 
 const planCards = [
   {
@@ -185,6 +186,7 @@ const ProPlans = () => {
           </div>
         </div>
       </div>
+      <ProFaq></ProFaq>
     </section>
   );
 };

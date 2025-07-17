@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../../layouts/RootLayout/RootLayout";
-import Home from "../../pages/Index/Home/Home"
+import Home from "../../pages/Index/Home/Home";
 import AdminLayout from "../../layouts/AdminLayout/AdminLayout";
 import MiAdmin from "../../pages/MiAdmin/MiAdmin";
 import AdminDashboard from "../../pages/MiAdmin/AdminDashboard/AdminDashboard";
@@ -12,52 +12,52 @@ import Satisfaction from "../../ProComponents/Satisfaction/Satisfaction";
 import ProPlans from "../../ProComponents/ProSharedItems/ProNavComponents/ProPlans/ProPlans";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        Component: RootLayout,
-        children: [
-            {
-                index: true,
-                Component: Home,
-            },
-            {
-                path: "/legal-terms",
-                Component: TermsAndConditions,
-            },
-            {
-                path: "/privacy-policy",
-                Component: PrivacyPolicy,
-            }
-        ]
-    },
-    {
-        path: "/pro",
-        Component: ProLayout,
-        children: [
-            {
-                path: "satisfaction-guarantee",
-                Component: Satisfaction,
-            },
-            {
-                path: "plans",
-                Component: ProPlans,
-            }
-        ]
-    },
-    {
-        path: "/",
-        Component: AdminLayout,
-        children: [
-            {
-                path: "admin-login",
-                Component: AdminLogin,
-            },
-            {
-                path: "admin-dashboard",
-                Component: AdminDashboard,
-            }
-        ]
-    }
-])
+  {
+    path: "/",
+    Component: RootLayout,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "/legal-terms",
+        Component: TermsAndConditions,
+      },
+      {
+        path: "/privacy-policy",
+        Component: PrivacyPolicy,
+      },
+    ],
+  },
+  {
+    path: "/pro",
+    Component: ProLayout,
+    children: [
+      {
+        path: "satisfaction-guarantee",
+        Component: Satisfaction,
+      },
+      {
+        path: "plans",
+        Component: ProPlans,
+      },
+    ],
+  },
+  {
+    path: "/",
+    Component: AdminLayout,
+    children: [
+      {
+        path: "admin-login",
+        Component: AdminLogin,
+      },
+      {
+        path: "admin-dashboard",
+        Component: AdminDashboard,
+      },
+    ],
+  },
+]);
 
-export default router
+export default router;
