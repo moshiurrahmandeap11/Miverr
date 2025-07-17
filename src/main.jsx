@@ -7,6 +7,15 @@ import router from "./router/Router/Router.jsx";
 import AuthProvider from "./Providers/AuthProvider/AuthProvider.jsx";
 import { Toaster } from "react-hot-toast";
 import { ScrollProvider } from "./Providers/ScrollContext/ScrollContext.jsx";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+  AOS.init({
+    duration: 800,
+    once: false,
+  });
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

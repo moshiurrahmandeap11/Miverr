@@ -10,10 +10,10 @@ const MiverPro = () => {
       navigate_link: "/pro/satisfaction-guarantee",
     },
     {
-      title: "Pro Rewards program",
+      title: "Pro Business Rewards program",
       desc: "Each order brings you closer to exclusive perks.",
       img: "https://i.postimg.cc/BZHf6nRt/crown.png",
-      navigate_link: "/pro/rewards",
+      navigate_link: "/pro/pro-business-solutions",
     },
     {
       title: "Sourcing services",

@@ -10,6 +10,7 @@ import PrivacyPolicy from "../../components/PrivacyPolicy/PrivacyPolicy";
 import ProLayout from "../../layouts/ProLayout/ProLayout";
 import Satisfaction from "../../ProComponents/Satisfaction/Satisfaction";
 import ProPlans from "../../ProComponents/ProSharedItems/ProNavComponents/ProPlans/ProPlans";
+import ProBusinessSolutions from "../../ProComponents/ProBusinessSolutions/ProBusinessSolutions";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         path: "plans",
         Component: ProPlans,
       },
+      {
+        path: "pro-business-solutions",
+        Component: ProBusinessSolutions,
+      }
     ],
   },
   {
